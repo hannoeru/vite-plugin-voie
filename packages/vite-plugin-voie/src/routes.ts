@@ -25,6 +25,7 @@ export function buildRoutes({
       .replace(new RegExp(`\\.(${extensions.join('|')})$`), '')
       .split('/')
       .slice(1); // removing the pagesDir means that the path begins with a '/'
+    
 
     const component = file.replace(root, '');
     const route: Route = {

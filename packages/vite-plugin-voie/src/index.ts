@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite';
+import { resolve } from 'path';
 import { MODULE_NAME } from './constants';
 import { generateRoutesCode } from './generator';
 import { Options, UserOptions } from './options';
@@ -13,6 +14,8 @@ function createPlugin(userOptions: UserOptions = {}): Plugin {
     extendRoute: (route) => route,
     ...userOptions,
   };
+
+  const rootDir = resolve(options.root, options.pagesDir)
 
   return {
     name: 'voie',
@@ -31,6 +34,15 @@ function createPlugin(userOptions: UserOptions = {}): Plugin {
         return await generateRoutesCode(options);
       }
       return null;
+    },
+    handleHotUpdate({ file, modules, server }) {
+      if (file.startsWith(rootDir)) {
+        const { moduleGraph } = server
+        const module = moduleGraph.getModuleById(MODULE_NAME)
+      
+        return [module]
+      }
+      return []
     },
   };
 }

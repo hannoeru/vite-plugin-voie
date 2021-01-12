@@ -3,7 +3,9 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "release": "lerna publish --no-private",
-    "test": "lerna run test --stream --parallel"
+    "test": "lerna run test --stream --parallel",
+    "example:dev": "npm -C examples/basic run dev",
+    "example:build": "npm -C examples/basic run build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -23,6 +25,7 @@
     "@types/glob-to-regexp": "^0.4.0",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "cross-env": "^7.0.3",
     "jest": "^26.4.1",
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
